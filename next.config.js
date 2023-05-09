@@ -7,30 +7,30 @@ const nextConfig = {
         appDir: true,
     },
     headers() {
-      return [
-        {
-          // Cache all content pages
-          source: "/((?!_next|.*\\..*).*)",
-          headers: [
+        return [
             {
-              key: "Cache-Control",
-              value: [
-                `s-maxage=` + ms("1d") / 1000,
-                `stale-while-revalidate=` + ms("1y") / 1000,
-              ].join(", "),
-            },
-          ],
+                // Cache all content pages
+                source: '/((?!_next|.*\\..*).*)',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: [
+                            `s-maxage=` + ms('1d') / 1000,
+                            `stale-while-revalidate=` + ms('1y') / 1000
+                        ].join(', ')
+                    }
+                ],
 
-          // If you're deploying on a host that doesn't support the `vary` header (e.g. Vercel),
-          // make sure to disable caching for prefetch requests for Server Components.
-          missing: [
-            {
-              type: "header",
-              key: "Next-Router-Prefetch",
-            },
-          ],
-        },
-      ];
+                // If you're deploying on a host that doesn't support the `vary` header (e.g. Vercel),
+                // make sure to disable caching for prefetch requests for Server Components.
+                missing: [
+                    {
+                        type: 'header',
+                        key: 'Next-Router-Prefetch'
+                    }
+                ]
+            }
+        ];
     },
 };
 
